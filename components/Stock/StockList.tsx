@@ -2,7 +2,8 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
-import CardDataStats from "./CardDataStats";
+import StockCard from "./StockCard";
+import Presentation from "../Presentation";
 
 const Dashboard: React.FC = () => {
 
@@ -35,19 +36,15 @@ const Dashboard: React.FC = () => {
     }, []);
 
 
-
     return (
         <>
-            {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-        <CardDataStats symbolStock={dataStock.symbol} nameStock={dataStock.longName}  logoStock={dataStock.logourl} valueToday={dataStock.regularMarketDayLow} rate="0.43%" levelUp>
-        </CardDataStats>
-      </div> */}
+            <Presentation></Presentation>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
-                {dataStockCard.map((card: any, index) => (
+                {dataStockCard.map((card: any, index: any) => (
                     Number(card.change) < 0 ? (
-                        <CardDataStats key={index} symbolStock={card.stock} nameStock={card.name} logoStock={card.logo} valueToday={card.close} rate={card.change} levelDown></CardDataStats>
-                    ) : (<CardDataStats key={index} symbolStock={card.stock} nameStock={card.name} logoStock={card.logo} valueToday={card.close} rate={card.change} levelUp></CardDataStats> )
+                        <StockCard key={index} symbolStock={card.stock} nameStock={card.name} logoStock={card.logo} valueToday={card.close} rate={card.change} levelDown></StockCard>
+                    ) : (<StockCard key={index} symbolStock={card.stock} nameStock={card.name} logoStock={card.logo} valueToday={card.close} rate={card.change} levelUp></StockCard> )
                 ))}
             </div>
 

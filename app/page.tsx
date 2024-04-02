@@ -1,7 +1,7 @@
 
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layout/DefaultLayout";
-import Dashboard from "@/components/Dashboard";
+import StockList from "@/components/Stock/StockList";
 
 export const metadata: Metadata = {
   title:
@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <>
       <DefaultLayout>
-         <Dashboard></Dashboard>
+         <StockList></StockList>
       </DefaultLayout>
     </>
   );
