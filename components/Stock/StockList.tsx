@@ -12,17 +12,6 @@ const Dashboard: React.FC = () => {
     const [isLoading, setLoading] = useState([true])
     const [dataStockCard, setStockCard] = useState<any>([])
 
-    // let getStocks = "http://localhost:3000/api/stocks"
-
-
-    // useEffect(() => {
-    //     async function fetchData() {
-    //         const res = await axios.get(getStocks);
-    //         setChart(res.data.results[0]);
-    //     }
-    //     fetchData();
-    // }, []);
-
 
     const token = "mXF7E3cgxuBv5AF6kSdC9X"
 

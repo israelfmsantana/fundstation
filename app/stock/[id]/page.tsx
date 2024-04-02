@@ -23,28 +23,5 @@ const StockPage = ({
   );
 };
 
-// Component where the parameter is passed
-
-
-
-
-
 
 export default StockPage;
-  // const [detailsStock, setStockDetails] = useState<any>([])
-  // const { stockName } = router.params;
-  // const token = "mXF7E3cgxuBv5AF6kSdC9X"
-
-
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const res = await axios.get('https://brapi.dev/api/quote/' + stockName + '?token=' + token);
-  //     setStockDetails(res.data.results);
-  //   }
-  //   fetchData();
-  // }, []);
-
-  // Faça uma requisição à API Brapi para obter os detalhes do estoque com o ID fornecido
-  // Exiba os detalhes do estoque no componente
-
