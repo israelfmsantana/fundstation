@@ -27,13 +27,11 @@ const Card: React.FC<CardProps> = ({children, typeCard, colorBg}) => {
 
         case 'right':
             cardContent =   
-            
-            <div className="flex items-center justify-between w-full">
-                <div className="flex flex-col lg:flex-row w-full min-h-64 items-start lg:items-center rounded shadow">
-                    <div className="w-full dark:bg-slate-800 bg-white">{children}</div>
-                    <div className={`w-full ${colorBg}`}></div>
-                </div>
+            <div className="rounded shadow-xl overflow-hidden w-full flex ">
+                {children}
             </div>
+            
+            
             
         break;
 

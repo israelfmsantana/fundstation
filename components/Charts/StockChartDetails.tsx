@@ -27,7 +27,7 @@ import {
 interface StockChartDetailsProps {
   dataStock: any
 }
-const StockCardChartDetails: React.FC<StockChartDetailsProps> = ({
+const StockChartDetails: React.FC<StockChartDetailsProps> = ({
   dataStock
 }) => {
 
@@ -136,4 +136,4 @@ const StockCardChartDetails: React.FC<StockChartDetailsProps> = ({
 };
 
 
-export default StockCardChartDetails;
+export default StockChartDetails;
