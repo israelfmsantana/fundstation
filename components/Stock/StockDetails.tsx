@@ -11,26 +11,10 @@ import { fetchHistoricalData } from "@/app/api/stock-api";
 
 import { useFormatter } from 'next-intl';
 
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    Tooltip,
-    PointElement,
-    LineElement,
-} from "chart.js";
 
-import { Line } from "react-chartjs-2";
 import Card from "../Layout/Card";
 
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Tooltip
-);
 
 interface StockDetailsProps {
     nameStock: string;
