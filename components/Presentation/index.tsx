@@ -12,7 +12,7 @@ const Presentation: React.FC = () => {
         <>
             <div className="mb-8">
                 <div className="text-xl font-bold text-black dark:text-white">Dashboard</div>
-                <div className="text-lg font-normal">Feliz em ver novamente Matheus. Obtenha atualização do seu ativo hoje, boa sorte.</div>
+                <div className="text-lg font-normal">Estamos felizes em te ver novamente Matheus. Obtenha atualização do mercado de ações através da nossa IA.</div>
             </div>
         </>
     );
