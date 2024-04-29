@@ -5,8 +5,8 @@ import StockList from "@/components/Stock/StockList";
 
 export const metadata: Metadata = {
   title:
-    "Next.js E-commerce Dashboard | TailAdmin - Next.js Dashboard Template",
-  description: "This is Next.js Home for TailAdmin Dashboard Template",
+    "Fundstation Plataform",
+  description: "Plataforma de investimentos baseados em IA",
 };
 
 export default function Home() {
