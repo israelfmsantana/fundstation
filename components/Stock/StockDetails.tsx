@@ -4,8 +4,8 @@ import axios from 'axios';
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 import Image from "next/image";
 
-import StockChartDetails from "../Charts/StockChartDetails"
-import StockChart from "../Charts/StockChartDetails"
+/* import StockChartDetails from "../Charts/StockChartDetails"
+import StockChart from "../Charts/StockChartDetails" */
 import ChartFilter from "../Buttons/ChartFilter"
 import { fetchHistoricalData } from "@/app/api/stock-api";
 
@@ -150,7 +150,7 @@ const StockCardDetails: React.FC<StockDetailsProps> = ({
                         ))}
 
                     </ul>
-                    <StockChartDetails dataStock={data}></StockChartDetails>
+                    {/* <StockChartDetails dataStock={data}></StockChartDetails> */}
                     {/* <canvas id="chart" className="w-full"></canvas> */}
                 </div>
 
