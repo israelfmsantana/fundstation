@@ -12,9 +12,9 @@ const ChartFilter: React.FC<ChartFilterProps> = ({ text, active, onClick }) => {
       onClick={onClick}
       className={`w-12 m-2 h-8 border-1 rounded-md flex items-center justify-center cursor-pointer ${
         active
-          ? "bg-blue-600 border-indigo-700 text-slate-100"
-          : "border-blue-300 text-blue-300"
-      } transition duration-200 hover:bg-blue-400 hover:text-slate-100 hover:border-blue-700`}
+          ? "bg-indigo-600 border-indigo-700 text-slate-100"
+          : "border-indigo-300 text-indigo-300"
+      } transition duration-200 hover:bg-indigo-400 hover:text-indigo-100 hover:border-indigo-700`}
     >
       {text}
     </button>

@@ -4,8 +4,8 @@ import axios from 'axios';
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 import Image from "next/image";
 
-/* import StockChartDetails from "../Charts/StockChartDetails"
-import StockChart from "../Charts/StockChartDetails" */
+import StockChart from "../Charts/StockChart"
+
 import ChartFilter from "../Buttons/ChartFilter"
 import { fetchHistoricalData } from "@/app/api/stock-api";
 
@@ -135,23 +135,8 @@ const StockCardDetails: React.FC<StockDetailsProps> = ({
     return (
         <>
             <Card colorBg={"bg-blue-600"} typeCard="right">
-                <div className="w-full px-5 pb-4 pt-8 bg-blue-500  text-white items-center">
-                    <ul className="flex">
-                        {Object.keys(chartConfig).map((item) => (
-                            <li key={item}>
-                                <ChartFilter
-                                    text={item}
-                                    active={filter === item}
-                                    onClick={() => {
-                                        setFilter(item);
-                                    }}
-                                />
-                            </li>
-                        ))}
-
-                    </ul>
-                    {/* <StockChartDetails dataStock={data}></StockChartDetails> */}
-                    {/* <canvas id="chart" className="w-full"></canvas> */}
+                <div className="w-full px-5 pb-4 pt-8 bg-white dark:bg-boxdark  text-white items-center">
+                    <StockChart symbol={nameStock} />
                 </div>
 
 

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 export default function SignUpForm() {
     const [step, setStep] = useState(1);
@@ -21,6 +22,7 @@ export default function SignUpForm() {
         }
     }
 
+  
     return (
         <div className="max-w-3xl mx-auto px-4 py-10">
             {step === 4 && (
@@ -36,9 +38,7 @@ export default function SignUpForm() {
                             Thank you. We have sent you an email to demo@demo.test. Please click the link in the message to activate your account.
                         </div>
 
-                        <button onClick={() => setStep(1)} className="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border">
-                            Back to home
-                        </button>
+                        <Link className="w-40 block mx-auto focus:outline-none py-2 px-5 rounded-lg shadow-sm text-center text-gray-600 bg-white hover:bg-gray-100 font-medium border" href="https://fundstation-site.vercel.app/" passHref>Back to home</Link>
                     </div>
                 </div>
             )}
