@@ -1,5 +1,6 @@
 import utilStyles from "../../public/styles/utils.module.css";
 import thankYouStyles from "../../public/styles/ThankYou.module.css";
+import formStyles from "../../public/styles/Form.module.css";
 import Image from "next/image";
 
 export default function ThankYou() {
@@ -24,6 +25,15 @@ export default function ThankYou() {
 					fun using our platform. If you ever need support, please
 					feel free to email us at support@loremgaming.com.
 				</p>
+
+				<button
+					type="button"
+					className={formStyles.bottomButton && formStyles.buttonConfirm
+					}
+					
+				>
+					<a href="/">Acessar</a>
+				</button>
 			</article>
 		</section>
 	);

@@ -35,7 +35,7 @@ export default function Form({
 		...formData.addOnsInfo,
 	});
 
-	function handleSubmit(e) {
+	async function handleSubmit(e) {
 		e.preventDefault();
 		if (step == 1) {
 			formValidation();
@@ -43,12 +43,31 @@ export default function Form({
 			updateFormData(selectPlanInfo);
 		} else if (step == 3) {
 			updateFormData(addOnsInfo);
+		} else if (step == 4){
+			console.log("enviando email")
+
+			const res = await fetch('/api/email', {
+				method: 'POST',
+				headers: {
+				  'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ name: "Matheus", email: "cosmoencantos@gmail.com", phone:"27981235630" }),
+			  });
+		  
+			  const data = await res.json();
+		  
+			  if (data.success) {
+				alert('Código de acesso enviado para seu email!');
+			  } else {
+				alert('Houve um erro ao enviar o email.');
+			  }
 		}
 
 		if (step != 1) {
 			setStep((s) => s + 1);
 		}
 	}
+	
 	function handleGoBack() {
 		setStep((s) => {
 			return s - 1;
@@ -124,16 +143,17 @@ export default function Form({
 						}
 						onClick={handleGoBack}
 					>
-						Go Back
+						Voltar
 					</button>
 					<button
 						type="submit"
 						className={`${formStyles.bottomButton} ${
-							step == 4 && formStyles.buttonConfirm
+							step == 3 && formStyles.buttonConfirm
 						}`}
 					>
-						{step == 4 ? "Confirm" : "Next Step"}
+						{step == 4 ? "Confirmar" : "Próxima etapa"}
 					</button>
+					
 				</div>
 			</form>
 		);

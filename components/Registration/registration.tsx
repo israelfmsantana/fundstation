@@ -218,16 +218,16 @@ import Step from "@/Components/step";
 import Form from "@/Components/form/form";
 import { useState } from "react";
 
-const stepTitles = ["your info", "select plan", "add-ons", "summary"];
+const stepTitles = ["suas informações", "Perfil de Investimento", "categorias de ações", "resumo"];
 
 export default function Home() {
 	const [formData, setFormData] = useState({
 		personalInfo: { name: "", email: "", phoneNumber: "" },
 		planInfo: { cardOption: 0, timeframe: false },
 		addOnsInfo: {
-			"Online service": true,
-			"Larger storage": true,
-			"Customizable profile ": false,
+			"Financias": false,
+			"Comércio Varejista": false,
+			"Minerais Energéticos ": false,
 		},
 	});
 	const [step, setStep] = useState(1);

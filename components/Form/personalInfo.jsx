@@ -30,8 +30,8 @@ export default function PersonalInfo({
 			return (
 				<span className={utilStyles.error}>
 					{validator === undefined
-						? "This field is required"
-						: "Invalid format"}
+						? "Esse campo é obrigatório"
+						: "Formato inválido"}
 				</span>
 			);
 	}
@@ -39,11 +39,11 @@ export default function PersonalInfo({
 	return (
 		<>
 			<h1 className={`${utilStyles.title} ${utilStyles.colorText}`}>
-				Personal info
+				Informações pessoais
 			</h1>
 			<fieldset className={utilStyles.noBorder}>
 				<legend className={utilStyles.description}>
-					Please provide your name, email address, and phone number.
+					Por favor, preencha os dados abaixo.
 				</legend>
 				<label
 					htmlFor="name"
@@ -51,7 +51,7 @@ export default function PersonalInfo({
 				>
 					{" "}
 					<div className={personalStyles.labelContainer}>
-						<span>Name</span>
+						<span>Nome</span>
 						{getError(validForm.hasValidName)}
 						{console.log(validForm.hasValidName)}
 					</div>
@@ -62,7 +62,7 @@ export default function PersonalInfo({
 						type="text"
 						value={personalInfo.name}
 						onChange={handleNameChange}
-						placeholder="e.g. Stephen King"
+						placeholder="Digite o seu nome"
 						id="name"
 						name="name"
 						maxLength={32}
@@ -74,7 +74,7 @@ export default function PersonalInfo({
 				>
 					{" "}
 					<div className={personalStyles.labelContainer}>
-						<span>Email Address</span>
+						<span>Email</span>
 						{getError(validForm.hasValidEmailAddress)}
 					</div>
 					<input
@@ -85,7 +85,7 @@ export default function PersonalInfo({
 						type="email"
 						value={personalInfo.email}
 						onChange={handleEmailChange}
-						placeholder="e.g. stephenking@lorem.com"
+						placeholder="Digite o seu email"
 						id="email"
 						name="email"
 					/>
@@ -98,7 +98,7 @@ export default function PersonalInfo({
 				>
 					{" "}
 					<div className={personalStyles.labelContainer}>
-						<span>Phone Number</span>
+						<span>Número de telefone</span>
 						{getError(validForm.hasValidPhoneNumber)}
 					</div>
 					<input
@@ -107,7 +107,7 @@ export default function PersonalInfo({
 							utilStyles.containerError
 						}`}
 						type="tel"
-						placeholder="e.g. +1 234 567 890"
+						placeholder="Digite o seu telefone"
 						value={personalInfo.phoneNumber}
 						onChange={handlePhoneNumberChange}
 						id="phoneNumber"

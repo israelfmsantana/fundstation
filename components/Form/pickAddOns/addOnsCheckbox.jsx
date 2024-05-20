@@ -36,10 +36,6 @@ export default function AddOnsCheckbox({
 					{description}
 				</p>
 			</div>
-			<p className={checkboxStyles.checkboxPrice}>
-				+${price}
-				{yearly ? "0/yr" : "/mo"}
-			</p>
 		</label>
 	);
 }

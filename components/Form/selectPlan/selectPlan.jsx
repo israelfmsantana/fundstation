@@ -5,7 +5,7 @@ import Image from "next/image";
 import ToggleButton from "./toggleButton";
 
 export default function SelectPlan({ selectPlanInfo, setSelectPlanInfo }) {
-	const cards = ["arcade", "advanced", "pro"];
+	const cards = ["conservador", "moderado", "agressivo"];
 
 	function getPrice(multiplier) {
 		return 9 + multiplier * 3;
@@ -27,12 +27,12 @@ export default function SelectPlan({ selectPlanInfo, setSelectPlanInfo }) {
 	return (
 		<>
 			<h1 className={`${utilStyles.title} ${utilStyles.colorText}`}>
-				Select your plan
+				Selecione o seu Perfil
 			</h1>
 			<fieldset className={utilStyles.noBorder}>
-				<legend className={utilStyles.description}>
-					You have the option of monthly or yearly billing.
-				</legend>
+				<p className="text-gray-700 my-8">
+				Saber o seu perfil de investidor é o primeiro passo para a gente escolher investimentos que fazem sentido com seus objetivos.
+				</p>
 				<ul className={selectPlanStyles.optionsContainer}>
 					{cards.map((card, index) => (
 						<li key={card}>
@@ -65,25 +65,25 @@ export default function SelectPlan({ selectPlanInfo, setSelectPlanInfo }) {
 									>
 										{card.toUpperCase()}
 									</h2>
-									<p className={utilStyles.price}>
+{/* 									<p className={utilStyles.price}>
 										{selectPlanInfo.timeframe
 											? `$${getPrice(index)}0/yr`
 											: `$${getPrice(index)}/mo`}
-									</p>
-									{selectPlanInfo.timeframe && (
+									</p> */}
+{/* 									{selectPlanInfo.timeframe && (
 										<p
 											className={`${utilStyles.colorText} ${selectPlanStyles.mdDescription}`}
 										>
 											2 months free
 										</p>
-									)}
+									)} */}
 								</div>
 							</label>
 						</li>
 					))}
 				</ul>
 
-				<div className={selectPlanStyles.monthlyYearly}>
+{/* 				<div className={selectPlanStyles.monthlyYearly}>
 					<p
 						className={`${
 							!selectPlanInfo.timeframe && utilStyles.colorText
@@ -102,7 +102,7 @@ export default function SelectPlan({ selectPlanInfo, setSelectPlanInfo }) {
 					>
 						Yearly
 					</p>
-				</div>
+				</div> */}
 			</fieldset>
 		</>
 	);
