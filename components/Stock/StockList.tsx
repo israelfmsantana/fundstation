@@ -29,7 +29,7 @@ const Dashboard: React.FC = () => {
 
     return (
         <>
-            <Presentation></Presentation>
+            <Presentation title="Ações" description="Bem vindo, Matheus. Aqui você encontrará as melhores ações validadas pela nossa IA."></Presentation>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
                 {dataStockCard.map((card: any, index: any) => (

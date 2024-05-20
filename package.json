@@ -12,6 +12,7 @@
     "@heroicons/react": "^2.1.3",
     "apexcharts": "^3.45.2",
     "axios": "^1.6.8",
+    "classnames": "^2.5.1",
     "flatpickr": "^4.6.13",
     "heroicons": "^2.1.3",
     "highcharts": "^11.4.0",

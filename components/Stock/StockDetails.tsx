@@ -140,7 +140,7 @@ const StockCardDetails: React.FC<StockDetailsProps> = ({
                 </div>
 
 
-                <div className="flex w-full md:w-1/2 p-10 text-gray-800 bg-white dark:text-white dark:border-strokedark dark:bg-boxdark">
+                <div className="flex items-center w-full md:w-1/2 p-10 text-gray-800 bg-white dark:text-white dark:border-strokedark dark:bg-boxdark">
                     <div className="w-full">
                         <div className="flex justify-between items-center mb-4">
                             <Image src={dataStockDetails.logourl} alt="" width={40} height={40} className="rounded"></Image>
