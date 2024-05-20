@@ -86,10 +86,12 @@ const SignIn: React.FC = () => {
                                 </div>
                             </div>
                             <div>
-                                <a href="/"
-                                    className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                    Entrar
-                                </a>
+                                <button className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <a href="/"
+                                        className="">
+                                        Entrar
+                                    </a>
+                                </button>
                             </div>
                             <div>
                                 <span className="flex items-center justify-center space-x-2">
@@ -99,10 +101,12 @@ const SignIn: React.FC = () => {
                                 </span>
                             </div>
                             <div>
-                                <a href="signup"
-                                    className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-blue-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                                    Cadastrar
-                                </a>
+                                <button className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-blue-600 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                                    <a href="signup"
+                                        className="">
+                                        Cadastrar
+                                    </a>
+                                </button>
                             </div>
                         </form>
                     </div>

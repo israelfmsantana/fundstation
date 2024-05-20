@@ -20,6 +20,10 @@ const config: Config = {
     },
     extend: {
       colors: {
+        backgroundImage: {
+          'sidebar-desktop': "url('../../public/images/bg-sidebar-desktop.svg')",
+          'sidebar-mobile': "url('../../public/images/bg-sidebar-mobile.svg')",
+        },
         current: "currentColor",
         transparent: "transparent",
         white: "#FFFFFF",

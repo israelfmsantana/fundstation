@@ -1,0 +1,126 @@
+.checkboxContainer{
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    user-select:none;
+    align-items: center;
+    border:1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+.checkedContainer{
+    background-color:var(--alabaster);
+    border-color:var(--purplish-blue);
+}
+
+.checkboxInput {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkboxSpan {
+    position: relative;
+    top:0;
+    left:0;
+    background-color: transparent;
+    border:1px solid var(--light-gray);
+    transition: all 0.2s ease;
+    border-radius:0.3rem;
+}
+
+.checkboxInput:checked ~ .checkboxSpan{
+    background-color: var(--purplish-blue);
+}
+
+.checkboxSpan::after{
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkboxInput:checked ~ .checkboxSpan::after{
+    display: block;
+}
+
+.checkboxSpan::after{
+    background: url("../../images/icon-checkmark.svg");
+    background-repeat: no-repeat;
+    background-size: cover; 
+}
+
+.checkboxPrice{
+    color:var(--purplish-blue);
+    margin-left:auto;
+}
+
+@media(max-width:1299px){
+    .checkboxContainer{
+        margin-bottom:0.8rem;
+        padding:0 1rem;
+        height:3.8rem;
+    }
+    .checkboxContainer:first-of-type{
+        margin-top:1.5rem;
+    }
+    .checkboxContainer:last-of-type{
+        margin-bottom:0;
+    }
+    .checkboxSpan{
+        margin-right:1rem;
+        height: 1.3rem;
+        width: 1.3rem;
+    }
+    .checkboxSpan::after{
+        left: 3px;
+        top: 5px;
+        width: 12px;
+        height:8px;
+    }
+
+    .checkboxTitle{
+        font-size:14px;
+    }
+    .checkboxDescription{
+        font-size:12px;
+        font-weight:500;
+    }
+
+    .checkboxPrice{
+        font-size:12px;
+        font-weight:500;
+
+    }
+}
+@media(min-width:1300px){
+    .checkboxContainer{
+        height: 6.6rem;
+        margin-bottom:1.5rem;
+    }
+    .checkboxSpan{
+        margin:0 2rem;
+        height: 27px;
+        width: 27px;
+    }
+    .checkboxSpan::after{
+        left: 5px;
+        top: 8px;
+        width: 15px;
+        height:10px;
+    }
+
+    .checkboxTitle{
+        font-size:22px;
+        margin-bottom:0.2rem;
+    }
+    .checkboxDescription{
+        font-size:19px;
+    }
+
+    .checkboxPrice{
+        font-size:19px;
+        margin-right:2rem;
+    }
+}
