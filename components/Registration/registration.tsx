@@ -215,7 +215,7 @@ export default function SignUpForm() {
 
 import Head from "next/head";
 import Step from "@/Components/step";
-import Form from "@/Components/form/form";
+import Form from "@/Components/Form/form";
 import { useState } from "react";
 
 const stepTitles = ["suas informações", "Perfil de Investimento", "categorias de ações", "resumo"];
