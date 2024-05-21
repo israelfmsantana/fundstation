@@ -6,7 +6,8 @@ import axios from 'axios';
 import DefaultLayout from "@/components/Layout/DefaultLayout";
 import StockDetails from "@/components/Stock/StockDetails";
 import PageHeading from '@/components/Heading/PageHeading';
-import StockPortfolio from '@/components/Stock/StockPorttolio';
+import StockPortfolio from '@/components/Stock/StockPortfolio';
+import StockChartPerformance from '@/components/Charts/StockChartPerformance';
 
 
 
