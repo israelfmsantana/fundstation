@@ -6,19 +6,19 @@ export default function PickAddOns({ addOns, setAddOns, yearly }) {
 		{
 			isChecked: addOns["Financias"],
 			title: "Financias",
-			description: "Access to multiplayer games",
+			description: "BBAS3, ITUB4, XP, SANB11, BBDC4, CIEL3 e entre outras.",
 			price: 1,
 		},
 		{
 			isChecked: addOns["Comércio Varejista"],
 			title: "Comércio Varejista",
-			description: "Extra 1TB of cloud save",
+			description: "MGLU3, BHIA3, AMER3, ARZZ3, PETZ3 e entre outras.",
 			price: 2,
 		},
 		{
 			isChecked: addOns["Minerais Energéticos"],
 			title: "Minerais Energéticos",
-			description: "Custom theme on your profile",
+			description: "PETR4, VALE3, EGIE3, CVX, ENEV3 e entre outras.",
 			price: 2,
 		},
 	];

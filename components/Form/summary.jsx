@@ -2,7 +2,7 @@ import utilStyles from "../../public/styles/utils.module.css";
 import summaryStyles from "../../public/styles/Summary.module.css";
 
 export default function Summary({ formData, toggleYearly }) {
-	const cardOptionToName = ["Arcade", "Advanced", "Pro"];
+	const cardOptionToName = ["Conservador", "Moderado", "Agressivo"];
 	const cardName = cardOptionToName[formData.planInfo.cardOption];
 	const yearly = formData.planInfo.timeframe;
 	const timeframe = yearly ? "Yearly" : "Monthly";
@@ -36,22 +36,22 @@ export default function Summary({ formData, toggleYearly }) {
 						<h3
 							className={`${utilStyles.colorText} ${summaryStyles.fontSize21}`}
 						>
-							{cardName} ({timeframe})
+							Perfil {cardName} {/* ({timeframe}) */} 
 						</h3>
-						<button
+{/* 						<button
 							type="button"
 							onClick={toggleYearly}
 							className={summaryStyles.buttonChange}
 						>
-							Change
-						</button>
+							Trocar
+						</button> */}
 					</div>
-					<h3
+{/* 					<h3
 						className={`${utilStyles.colorText}  ${summaryStyles.fontSize21}`}
 					>
 						${cardPrice}
 						{pricePerTimeframe}
-					</h3>
+					</h3> */}
 				</div>
 				<hr className={summaryStyles.lineBreak} />
 				{activeAddOns.map((addOn, i) => (
@@ -60,13 +60,13 @@ export default function Summary({ formData, toggleYearly }) {
 						key={i}
 					>
 						<p className={summaryStyles.addOnsName}>{addOn}</p>
-						<p
+{/* 						<p
 							className={`${summaryStyles.fontSize19} ${utilStyles.colorText}`}
 						>
 							{addOn == "Online service"
 								? `+$1${pricePerTimeframe}`
 								: `+$2${pricePerTimeframe}`}
-						</p>
+						</p> */}
 					</li>
 				))}
 			</article>
@@ -77,11 +77,12 @@ export default function Summary({ formData, toggleYearly }) {
 				${summaryStyles.paddingSides2rem}`}
 			>
 				<p className={summaryStyles.addOnsName}>
-					Total ({perTimeframe})
+					Total para Investir
 				</p>
 				<h2 className={summaryStyles.total}>
-					+${totalPrice}
-					{pricePerTimeframe}
+{/* 					+${totalPrice}
+					{pricePerTimeframe} */}
+					R$ 100,00
 				</h2>
 			</article>
 		</>

@@ -180,7 +180,8 @@ const DropdownUser = () => {
               fill=""
             />
           </svg>
-          Sair
+          <a href="/auth/signin">Sair</a>
+          
         </button>
       </div>
       {/* <!-- Dropdown End --> */}
