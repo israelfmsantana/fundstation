@@ -2,7 +2,7 @@
 
 import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey("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");
+sgMail.setApiKey("");
 
 
 export function sendEmail(to, subject, text) {
