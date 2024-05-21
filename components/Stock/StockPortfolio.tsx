@@ -119,6 +119,8 @@ interface StockPortfolioProps {
   rate: number;
   levelUp?: boolean;
   levelDown?: boolean;
+  valuePurchased?: number;
+  valueStock?: number;
 }
 
 const formatCurrency = (value = 0) => {
@@ -203,6 +205,8 @@ const StocksList = () => {
         rate={rate}
         levelUp={isUp}
         levelDown={isDown}
+        valuePurchased={stock.value_purchased}
+        valueStock={stock.value_stock}
       />
     );
   });
