@@ -111,6 +111,10 @@ import Link from 'next/link';
 import axios from 'axios'; // Importar o Axios
 
 import { ArrowDownIcon, ArrowUpIcon } from "@heroicons/react/24/outline";
+import StockChartPerformance from "@/components/Charts/StockChartPerformance"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { mockData } from '@/app/constants/mockBD';
 
 interface StockPortfolioProps {
   nameStock: string;
@@ -119,8 +123,9 @@ interface StockPortfolioProps {
   rate: number;
   levelUp?: boolean;
   levelDown?: boolean;
-  valuePurchased?: number;
-  valueStock?: number;
+  logoStock: string;
+  valuePurchased: number;
+  valueStock: number;
 }
 
 const formatCurrency = (value = 0) => {
@@ -138,6 +143,9 @@ const StockPortfolio: React.FC<StockPortfolioProps> = ({
   rate,
   levelUp,
   levelDown,
+  logoStock,
+  valuePurchased,
+  valueStock
 }) => {
   return (
 
@@ -171,6 +179,7 @@ const StockPortfolio: React.FC<StockPortfolioProps> = ({
             )}
           </span>
         </div>
+        <StockChartPerformance symbol={symbolStock} valuePurchased={valuePurchased} valueStock={valueStock} />
       </div>
   );
 };
@@ -178,11 +187,11 @@ const StockPortfolio: React.FC<StockPortfolioProps> = ({
 const StocksList = () => {
   const [stockDetails, setStockDetails] = useState<any[]>([]); // Estado para armazenar os detalhes das ações
 
-  useEffect(() => {
+/*   useEffect(() => {
     const fetchStockDetails = async () => {
       try {
         const res = await axios.get('http://localhost:8080/portfolio');
-        setStockDetails(res.data.results);
+        setStockDetails(res.data);
       } catch (error) {
         console.error('Error fetching stock details:', error);
       }
@@ -190,28 +199,48 @@ const StocksList = () => {
 
     fetchStockDetails();
   }, []);
+*/
 
-  const stocks = stockDetails.map((stock: any) => {
-    const isUp = stock.value_stock > stock.value_purchased;
-    const isDown = stock.value_stock < stock.value_purchased;
-    const rate = ((stock.value_stock - stock.value_purchased) / stock.value_purchased) * 100;
+  
+  const updateStockDetails = async () => {
+    try {
+      toast.success("As ações foram atualizadas!");
+    } catch (e) {
+      toast.error("Erro ao atualizar as ações!");
+    }
+  };
+ 
+
+  const stocks = mockData.map((stock: any) => {
+    const isUp = stock.valueStock > stock.valuePurchased;
+    const isDown = stock.valueStock < stock.valuePurchased;
+    const rate = ((stock.valueStock - stock.valuePurchased) / stock.valuePurchased) * 100;
 
     return (
       <StockPortfolio
+        logoStock={""}
         key={stock.id}
         nameStock={stock.symbol}
         symbolStock={stock.symbol}
-        valueToday={stock.value_stock}
+        valueToday={stock.valueStock}
         rate={rate}
         levelUp={isUp}
         levelDown={isDown}
-        valuePurchased={stock.value_purchased}
-        valueStock={stock.value_stock}
+        valuePurchased={stock.valuePurchased}
+        valueStock={stock.valueStock}
       />
     );
   });
 
-  return <div className="grid grid-cols-1 gap-4">{stocks}</div>;
+  return <div>
+  <button onClick={updateStockDetails} className="mb-4 px-4 py-2 bg-blue-500 text-white rounded">
+    Atualizar
+  </button>
+  <div className="grid grid-cols-1 gap-4">
+    {stocks}
+  </div>
+  <ToastContainer />
+</div>;
 };
 
 export default StocksList;
