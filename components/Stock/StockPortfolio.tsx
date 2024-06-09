@@ -108,6 +108,7 @@ export default StocksList; */
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import StockChartPerformance from "@/components/Charts/StockChartPerformance";
+import PortfolioEvolutionChart from '@/components/Charts/PortfolioEvolutionChart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -125,6 +126,24 @@ interface StockPortfolioProps {
 
 const formatCurrency = (value = 0) => {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+};
+
+const generateFakePortfolioEvolution = () => {
+  const fakeData = [];
+  let currentValue = 1000; // Valor inicial fictício
+
+  for (let i = 1; i <= 30; i++) {
+    const date = new Date();
+    date.setDate(date.getDate() - (30 - i));
+    currentValue += Math.random() * 50 - 25; // Variação fictícia
+    fakeData.push({
+      date: date.toISOString().split('T')[0],
+      value: parseFloat(currentValue.toFixed(2)),
+    });
+  }
+  console.log(fakeData)
+
+  return fakeData;
 };
 
 const simplifiedPercent = (value = 0) => {
@@ -184,6 +203,8 @@ const StockPortfolio: React.FC<StockPortfolioProps> = ({
 
 const StocksList = () => {
   const [stockDetails, setStockDetails] = useState<any[]>([]);
+  //const [portfolioEvolution, setPortfolioEvolution] = useState<{ date: string, value: number }[]>([]);
+  const [portfolioEvolution, setPortfolioEvolution] = useState(generateFakePortfolioEvolution());
 
   useEffect(() => {
     const fetchStockDetails = async () => {
@@ -195,7 +216,17 @@ const StocksList = () => {
       }
     };
 
+    const fetchPortfolioEvolution = async () => {
+      try {
+        const res = await axios.get('http://localhost:8080/portfolio/evolution');
+        setPortfolioEvolution(res.data);
+      } catch (error) {
+        console.error('Error fetching portfolio evolution:', error);
+      }
+    };
+
     fetchStockDetails();
+    fetchPortfolioEvolution();
   }, []);
 
   const updateStockDetails = async () => {
@@ -239,6 +270,8 @@ const StocksList = () => {
     updateStockDetails();
     updateValuePortfolio();
   };
+
+
 
   return (
     <div className="container mx-auto">
@@ -306,8 +339,13 @@ const StocksList = () => {
       </div>
       
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-6 mt-10">
         {stocks}
+      </div>
+
+
+      <div className="bg-white dark:text-white dark:border-strokedark dark:bg-boxdark rounded shadow px-8 py-6">
+          <PortfolioEvolutionChart data={portfolioEvolution} />
       </div>
       <ToastContainer />
     </div>
