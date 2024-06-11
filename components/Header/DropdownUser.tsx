@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Image from "next/image";
 
 const DropdownUser = () => {
@@ -7,6 +10,17 @@ const DropdownUser = () => {
 
   const trigger = useRef<any>(null);
   const dropdown = useRef<any>(null);
+
+
+  const updateBD = async () => {
+    try {
+      const res = await axios.get('http://localhost:8080/actions/barpi');
+      toast.success("O banco de dados foi atualizado!");
+    } catch (error) {
+      console.error('Error updating stock details:', error);
+      toast.error("Erro ao atualizar o banco de dados.");
+    }
+  };
 
   // close on click outside
   useEffect(() => {
@@ -160,6 +174,9 @@ const DropdownUser = () => {
               </svg>
               Configuração
             </Link>
+          </li>
+          <li>
+            <button onClick={updateBD}>Carregar BD</button>
           </li>
         </ul>
         <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">

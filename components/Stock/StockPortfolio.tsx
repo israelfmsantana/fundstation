@@ -128,19 +128,74 @@ const formatCurrency = (value = 0) => {
   return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 };
 
-const generateFakePortfolioEvolution = () => {
+const generateFakePortfolioEvolution1 = () => {
   const fakeData = [];
-  let currentValue = 1000; // Valor inicial fictício
-
-  for (let i = 1; i <= 30; i++) {
+  let currentValue = 0;
     const date = new Date();
-    date.setDate(date.getDate() - (30 - i));
-    currentValue += Math.random() * 50 - 25; // Variação fictícia
+    date.setDate(date.getDate());
     fakeData.push({
       date: date.toISOString().split('T')[0],
       value: parseFloat(currentValue.toFixed(2)),
     });
-  }
+
+  console.log(fakeData)
+
+  return fakeData;
+};
+
+
+const generateFakePortfolioEvolution2 = () => {
+  const fakeData = [];
+  let currentValue = 0;
+  const date = new Date();
+  date.setDate(date.getDate());
+
+  fakeData.push({
+    date: date.toISOString().split('T')[0],
+    value: parseFloat(currentValue.toFixed(2)),
+  });
+
+
+  currentValue = 1000;
+  fakeData.push({
+    date: date.toISOString().split('T')[0],
+    value: parseFloat(currentValue.toFixed(2)),
+  });
+
+  console.log(fakeData)
+
+  return fakeData;
+};
+
+
+
+
+const generateFakePortfolioEvolution22 = () => {
+  const fakeData = [];
+  let currentValue = 0;
+  const date = new Date();
+  date.setDate(date.getDate());
+
+  fakeData.push({
+    date: date.toISOString().split('T')[0],
+    value: parseFloat(currentValue.toFixed(2)),
+  });
+
+
+  currentValue = 1000;
+  fakeData.push({
+    date: date.toISOString().split('T')[0],
+    value: parseFloat(currentValue.toFixed(2)),
+  });
+
+
+  currentValue = 1009.7336;
+  date.setDate(date.getDate() + 2);
+  fakeData.push({
+    date: date.toISOString().split('T')[0],
+    value: parseFloat(currentValue.toFixed(2)),
+  });
+
   console.log(fakeData)
 
   return fakeData;
@@ -204,13 +259,13 @@ const StockPortfolio: React.FC<StockPortfolioProps> = ({
 const StocksList = () => {
   const [stockDetails, setStockDetails] = useState<any[]>([]);
   //const [portfolioEvolution, setPortfolioEvolution] = useState<{ date: string, value: number }[]>([]);
-  const [portfolioEvolution, setPortfolioEvolution] = useState(generateFakePortfolioEvolution());
+  const [portfolioEvolution, setPortfolioEvolution] = useState(generateFakePortfolioEvolution1());
 
   useEffect(() => {
     const fetchStockDetails = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/portfolio');
-        setStockDetails(res.data);
+        // const res = await axios.get('http://localhost:8080/portfolio');
+        // setStockDetails(res.data);
       } catch (error) {
         console.error('Error fetching stock details:', error);
       }
@@ -229,14 +284,14 @@ const StocksList = () => {
     fetchPortfolioEvolution();
   }, []);
 
-  const updateStockDetails = async () => {
+  const updateStockDetails1 = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/portfolio/atualizar');
+      const res = await axios.get('http://localhost:8080/portfolio/carregar');
       setStockDetails(res.data);
-      toast.success("As ações foram atualizadas!");
+      toast.success("As ações foram carregadas!");
     } catch (error) {
       console.error('Error updating stock details:', error);
-      toast.error("Erro ao atualizar as ações.");
+      toast.error("Erro ao carregar as ações.");
     }
   };
 
@@ -261,14 +316,87 @@ const StocksList = () => {
     );
   });
 
-  var valorCarteira = 1000
-  const updateValuePortfolio = async () => {
-    valorCarteira = 1002.45901639344262;
+  const [valorCarteira, setValorCarteira] = useState(0);
+  const [saldoCarteira, setSaldoCarteira] = useState(1000);
+  const [ganhosCarteira, setGanhosCarteira] = useState(0);
+  const updateValuePortfolio1 = async () => {
+    const novoValorCarteira = 1000;
+    setValorCarteira(novoValorCarteira);
+    setGanhosCarteira(0);
+
+
+    const novoSaldoCarteira = 0;
+    setSaldoCarteira(novoSaldoCarteira);
+
+    setPortfolioEvolution(generateFakePortfolioEvolution2());
+
   };
 
-  const handleClick = () => {
-    updateStockDetails();
-    updateValuePortfolio();
+  const CarregaCarteira = () => {
+    updateStockDetails1();
+    updateValuePortfolio1();
+  };
+
+
+
+
+
+
+
+
+
+  const updateStockDetails2 = async () => {
+    try {
+      const res = await axios.get('http://localhost:8080/portfolio/atualizar');
+      setStockDetails(res.data);
+      toast.success("As ações foram atualizadas!");
+    } catch (error) {
+      console.error('Error updating stock details:', error);
+      toast.error("Erro ao atualizar as ações.");
+    }
+  };
+
+  const AtualizaCarteira = () => {
+    updateValuePortfolio2();
+    updateStockDetails2();
+  };
+
+  const updateValuePortfolio2 = async () => {
+    const novoValorCarteira = 1009.7336;
+    setValorCarteira(novoValorCarteira);
+
+
+    const novoSaldoCarteira = 0;
+    setSaldoCarteira(novoSaldoCarteira);
+
+    setGanhosCarteira(9.7336);
+
+    setPortfolioEvolution(generateFakePortfolioEvolution22());
+
+  };
+
+
+
+
+
+
+
+
+  const LimpaCarteira = () => {
+    updateValuePortfolio3();
+  };
+
+  const updateValuePortfolio3 = async () => {
+    setValorCarteira(0);
+
+    setSaldoCarteira(1000);
+
+    setGanhosCarteira(0);
+
+    setPortfolioEvolution(generateFakePortfolioEvolution1());
+
+    setStockDetails([]);
+
   };
 
 
@@ -276,10 +404,24 @@ const StocksList = () => {
   return (
     <div className="container mx-auto">
       <button
-        onClick={handleClick}
+        onClick={CarregaCarteira}
         className="mb-6 px-6 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition-all duration-300 ease-in-out"
       >
-        Atualizar
+        Carrega Carteira
+      </button>
+
+      <button
+        onClick={AtualizaCarteira}
+        className=" ml-2 mb-6 px-6 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition-all duration-300 ease-in-out"
+      >
+        Atualiza Carteira
+      </button>
+
+      <button
+        onClick={LimpaCarteira}
+        className=" ml-20 mb-6 px-6 py-2 bg-indigo-300 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 transition-all duration-300"
+      >
+        Limpa Carteira
       </button>
 
       {/* <button 
@@ -297,7 +439,7 @@ const StocksList = () => {
             </svg>
           </div>
           <div className="ml-6">
-            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R$ {0}</h3>
+            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R$ {saldoCarteira}</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Saldo</p>
           </div>
         </div>
@@ -320,7 +462,7 @@ const StocksList = () => {
 
           </div>
           <div className="ml-6">
-            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R${200}</h3>
+            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R${ganhosCarteira}</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Ganhos</p>
           </div>
         </div>
@@ -332,7 +474,7 @@ const StocksList = () => {
 
           </div>
           <div className="ml-6">
-            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R${120}</h3>
+            <h3 className="mb-1 leading-5 text-gray-900 dark:text-gray-100 font-bold text-2xl">R${0}</h3>
             <p className="text-gray-600 dark:text-gray-400 text-sm tracking-normal font-normal leading-5">Perdas</p>
           </div>
         </div>
