@@ -2,8 +2,6 @@ import React from "react";
 import { ArrowLongLeftIcon } from '@heroicons/react/24/solid'
 import Button from '../Buttons/Button'
 
-import { useRouter } from 'next/router';
-
 const PageHeading: React.FC = () => {
     return (
         <div className="mb-8 bg-gray-50 w-full ">
