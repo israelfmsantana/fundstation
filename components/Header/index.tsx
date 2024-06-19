@@ -1,19 +1,25 @@
-import Link from "next/link";
 import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownMessage from "./DropdownMessage";
 import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
+import { useState } from "react";
 
-const Header = (props: {
-  sidebarOpen: string | boolean | undefined;
-  setSidebarOpen: (arg0: boolean) => void;
-}) => {
+const Header = (props: { setSidebarOpen: (arg0: boolean) => void; sidebarOpen: any; }) => {
+  const [searchText, setSearchText] = useState("");
+
+  const handleSearch = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    const symbolStock = searchText.trim();
+    if (symbolStock) {
+      window.location.href = `/stock/${symbolStock}`;
+    }
+  };
+
   return (
     <header className="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className="flex flex-grow items-center justify-between px-4 py-4 shadow-2 md:px-6 2xl:px-11">
         <div className="flex items-center gap-2 sm:gap-4 lg:hidden">
-          {/* <!-- Hamburger Toggle BTN --> */}
           <button
             aria-controls="sidebar"
             onClick={(e) => {
@@ -54,20 +60,19 @@ const Header = (props: {
               </span>
             </span>
           </button>
-          {/* <!-- Hamburger Toggle BTN --> */}
 
-          <Link className="block flex-shrink-0 lg:hidden" href="/">
+          <a href="/" className="block flex-shrink-0 lg:hidden">
             <Image
               width={32}
               height={32}
               src={"/images/logo/Logotipo.svg"}
               alt="Logo"
             />
-          </Link>
+          </a>
         </div>
 
         <div className="hidden sm:block">
-          <form action="https://formbold.com/s/unique_form_id" method="POST">
+          <form action="https://formbold.com/s/unique_form_id" method="POST" onSubmit={handleSearch}>
             <div className="relative">
               <button className="absolute left-0 top-1/2 -translate-y-1/2">
                 <svg
@@ -97,6 +102,9 @@ const Header = (props: {
                 type="text"
                 placeholder="Digite para pesquisar..."
                 className="w-full bg-transparent pl-9 pr-4 font-medium focus:outline-none xl:w-125"
+                id="searchInput"
+                value={searchText}
+                onChange={(e) => setSearchText(e.target.value)}
               />
             </div>
           </form>
@@ -126,4 +134,4 @@ const Header = (props: {
   );
 };
 
-export default Header;
+export default Header

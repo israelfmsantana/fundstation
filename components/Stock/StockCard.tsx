@@ -23,7 +23,7 @@ const formatCurrency = (value = 0) => {
 };
 
 const simplifiedPercent = (value = 0) => {
-  return value.toFixed(2);
+  return value;
 }
 
 

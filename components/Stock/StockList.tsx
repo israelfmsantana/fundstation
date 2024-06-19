@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
 
     const token = "mXF7E3cgxuBv5AF6kSdC9X"
 
-    let getListStocks = 'https://brapi.dev/api/quote/list?sortBy=close&sortOrder=desc&limit=10&sector=finance&token=' + token
+    let getListStocks = 'https://brapi.dev/api/quote/list?sortBy=close&sortOrder=desc&token=' + token
 
 
     useEffect(() => {
