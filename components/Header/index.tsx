@@ -4,15 +4,26 @@ import DropdownNotification from "./DropdownNotification";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import { useState } from "react";
+import axios from "axios";
 
 const Header = (props: { setSidebarOpen: (arg0: boolean) => void; sidebarOpen: any; }) => {
   const [searchText, setSearchText] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSearch = (e: { preventDefault: () => void; }) => {
+  const handleSearch = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     const symbolStock = searchText.trim();
     if (symbolStock) {
-      window.location.href = `/stock/${symbolStock}`;
+      try {
+        const response = await axios.get(`https://brapi.dev/api/quote/${symbolStock}?token=mXF7E3cgxuBv5AF6kSdC9X`);
+        if (response.data.results && response.data.results.length > 0) {
+          window.location.href = `/stock/${symbolStock}`;
+        } else {
+          setErrorMessage("Ação não encontrada.");
+        }
+      } catch (error) {
+        setErrorMessage("Ação não encontrada.");
+      }
     }
   };
 
@@ -104,10 +115,11 @@ const Header = (props: { setSidebarOpen: (arg0: boolean) => void; sidebarOpen: a
                 className="w-full bg-transparent pl-9 pr-4 font-medium focus:outline-none xl:w-125"
                 id="searchInput"
                 value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
+                onChange={(e) => { setSearchText(e.target.value); setErrorMessage(""); }}
               />
             </div>
           </form>
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
         </div>
 
         <div className="flex items-center gap-3 2xsm:gap-7">
@@ -134,4 +146,4 @@ const Header = (props: { setSidebarOpen: (arg0: boolean) => void; sidebarOpen: a
   );
 };
 
-export default Header
+export default Header;

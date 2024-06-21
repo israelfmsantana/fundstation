@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import Image from "next/image";
 import Link from 'next/link';
 
-
 import {
   ArrowDownIcon,
   ArrowUpIcon
@@ -23,9 +22,8 @@ const formatCurrency = (value = 0) => {
 };
 
 const simplifiedPercent = (value = 0) => {
-  return value;
+  return value.toFixed(2); // Arredonda para duas casas decimais
 }
-
 
 const StockCard: React.FC<StockCardProps> = ({
   nameStock,
@@ -49,26 +47,21 @@ const StockCard: React.FC<StockCardProps> = ({
           </h4>
         </div>
 
-
         <div className="mt-4 flex items-end justify-between">
           <div>
             <span className="text-sm font-medium dark:text-white">Preço (agora)</span>
           </div>
-
           <span className="flex items-center gap-1 text-sm font-bold dark:text-white">{formatCurrency(valueToday)}</span>
-
         </div>
+        
         <div className="mt-4 flex items-end justify-between">
           <div>
             <span className="text-sm font-medium dark:text-white">Variação (agora)</span>
           </div>
-
           <span
-            className={`flex items-center gap-1 text-sm font-medium ${levelUp && "text-meta-3"
-              } ${levelDown && "text-meta-1"} `}
+            className={`flex items-center gap-1 text-sm font-medium ${levelUp && "text-meta-3"} ${levelDown && "text-meta-1"} `}
           >
             {simplifiedPercent(rate)}
-
             {levelUp && (
               <ArrowUpIcon className="fill-meta-3" width={11} height={11}></ArrowUpIcon>
             )}
@@ -79,14 +72,8 @@ const StockCard: React.FC<StockCardProps> = ({
         </div>
       </div>
 
-
     </Link>
-
-
-
   );
 };
-
-
 
 export default StockCard;

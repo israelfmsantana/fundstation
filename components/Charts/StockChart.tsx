@@ -10,12 +10,7 @@ interface StockCardsProps {
 
 interface HistoricalDataPrice {
   date: number;
-  open: number;
-  high: number;
-  low: number;
   close: number;
-  volume: number;
-  adjustedClose: number;
 }
 
 // Função para formatar valores em reais
@@ -43,27 +38,41 @@ const CustomTooltip = ({ active, payload }: { active?: boolean; payload?: any })
   return null;
 };
 
+// Função para gerar dados aleatórios
+const generateRandomData = (days: number) => {
+  const data = [];
+  const currentTimestamp = Math.floor(Date.now() / 1000);
+  let previousClose = 2800 + Math.random() * 200; // Valor inicial aleatório
+
+  for (let i = 0; i < days; i++) {
+    const date = currentTimestamp - (days - i) * 86400; // Subtrai um dia em segundos para cada iteração
+    const close = previousClose + (Math.random() - 0.5) * 20; // Variação aleatória no fechamento
+    data.push({ date, close });
+    previousClose = close;
+  }
+  return data;
+}
+
+// Definição dos tipos para os períodos disponíveis
+type Period = '1d' | '5d' | '1mo' | '1y';
+
+// Configuração do gráfico com tipagem explícita
+const chartConfig: Record<Period, { days: number }> = {
+  "1d": { days: 1 },
+  "5d": { days: 5 },
+  "1mo": { days: 30 },
+  "1y": { days: 365 },
+};
+
 const StockChart: React.FC<StockCardsProps> = ({ symbol }) => {
   const [data, setData] = useState<HistoricalDataPrice[]>([]);
-  const [period, setPeriod] = useState('1d');
-
-  const chartConfig = {
-    "1d": { resolution: "1", days: 1, weeks: 0, months: 0, years: 0 },
-    "5d": { resolution: "15", days: 0, weeks: 1, months: 0, years: 0 },
-    "1mo": { resolution: "60", days: 0, weeks: 0, months: 1, years: 0 },
-    "1y": { resolution: "D", days: 0, weeks: 0, months: 0, years: 1 },
-  };
+  const [period, setPeriod] = useState<Period>('1d'); // Tipagem explícita do período
 
   useEffect(() => {
     const fetchData = async () => {
-      // const token = "mXF7E3cgxuBv5AF6kSdC9X"
-      // const result = await axios.get(`https://brapi.dev/api/quote/${symbol}?range=${period}&token=${token}`);
-      // setData(result.data.results);
-      // console.log("aqui", result)
-      const result = mockSearchResults;
-      const historicalData = result.results[0]?.historicalDataPrice;
-      setData(historicalData);
-      console.log("aqui", result);
+      const config = chartConfig[period];
+      const randomData = generateRandomData(config.days);
+      setData(randomData);
     };
     fetchData();
   }, [symbol, period]);
@@ -75,13 +84,6 @@ const StockChart: React.FC<StockCardsProps> = ({ symbol }) => {
     }));
   };
 
-    // Função para gerar as coordenadas da linha da grade horizontal no rodapé
-    const generateHorizontalGridLines = (yCoords: number[]) => {
-        // Retorna apenas a última coordenada Y, que corresponde ao rodapé
-        return [yCoords[yCoords.length - 1]];
-      };
-    
-
   return (
     <div>
       <ul className="flex">
@@ -91,7 +93,7 @@ const StockChart: React.FC<StockCardsProps> = ({ symbol }) => {
               text={item}
               active={period === item}
               onClick={() => {
-                setPeriod(item);
+                setPeriod(item as Period); // Casting para o tipo Period
               }}
             />
           </li>
@@ -99,13 +101,12 @@ const StockChart: React.FC<StockCardsProps> = ({ symbol }) => {
       </ul>
       <ResponsiveContainer width="100%" height={400}>
         <LineChart data={formatData(data)}>
-        <CartesianGrid strokeDasharray="4 4"/>
+          <CartesianGrid strokeDasharray="4 4" />
           <XAxis dataKey="date" tickFormatter={(tick) => formatDate(tick)} stroke="white" hide />
           <YAxis stroke="white" hide />
           <Tooltip content={<CustomTooltip />} contentStyle={{ backgroundColor: '#1C2434', border: 'none', borderRadius: '5px', color: '#ffffff' }} />
           <Legend />
-          <Line type="monotone" dataKey="close" stroke="#3C50E0" activeDot={{ r: 0 }} dot={false}/>
-
+          <Line type="monotone" dataKey="close" stroke="#3C50E0" activeDot={{ r: 0 }} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>
