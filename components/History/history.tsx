@@ -1,4 +1,4 @@
-import React from "react";
+/* import React from "react";
 import Timeline from "./timeline";
 import PortfolioEvolutionChart from "./portfolioEvolutionChart";
 
@@ -98,4 +98,71 @@ const HistoryPage: React.FC = () => {
   );
 };
 
+export default HistoryPage; */
+
+import React, { useEffect, useState } from "react";
+import Timeline from "./timeline";
+import PortfolioEvolutionChart from "./portfolioEvolutionChart";
+
+interface TimelineEvent {
+  buyDate: string;
+  sellDate: string;
+  buySymbol: string;
+  sellSymbol: string;
+  buyValueStock: number;
+  sellValueStock: number;
+  buyValuePurchased: number;
+  sellValueSell: number;
+  valorGanho: number;
+}
+
+interface PortfolioDataEntry {
+  date: string;
+  value: number;
+}
+
+const fetchTimelineEvents = async (): Promise<TimelineEvent[]> => {
+  const response = await fetch("http://localhost:8080/historicoportfolio/findall");
+  const data = await response.json();
+  return data;
+};
+
+const HistoryPage: React.FC = () => {
+  const [timelineEvents, setTimelineEvents] = useState<TimelineEvent[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const events = await fetchTimelineEvents();
+        setTimelineEvents(events);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="container p-4">
+      {timelineEvents.length > 0 ? (
+        <Timeline events={timelineEvents} />
+      ) : (
+        <div className="bg-white dark:text-white dark:border-strokedark dark:bg-boxdark rounded shadow px-8 py-6 flex flex-col">
+          <div>Não há dados de histórico</div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default HistoryPage;
+
+
