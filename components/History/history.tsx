@@ -107,13 +107,15 @@ import PortfolioEvolutionChart from "./portfolioEvolutionChart";
 interface TimelineEvent {
   buyDate: string;
   sellDate: string;
-  buySymbol: string;
-  sellSymbol: string;
+  buySymbolAction: string;
+  sellSymbolAction: string;
   buyValueStock: number;
   sellValueStock: number;
   buyValuePurchased: number;
-  sellValueSell: number;
+  sellValueStockSell: number;
   valorGanho: number;
+  valorPerda: number;
+  sellValuePurchased: number;
 }
 
 interface PortfolioDataEntry {
@@ -122,7 +124,7 @@ interface PortfolioDataEntry {
 }
 
 const fetchTimelineEvents = async (): Promise<TimelineEvent[]> => {
-  const response = await fetch("http://localhost:8080/historicoportfolio/findall");
+  const response = await fetch("http://localhost:8080/historicoPortfolio/findAll");
   const data = await response.json();
   return data;
 };

@@ -1,16 +1,19 @@
 import React from "react";
 import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/24/solid";
+import logoStock from "./logoStock.png"; // Importe seu próprio logo ou ajuste conforme necessário
 
 interface TimelineEvent {
   buyDate: string;
   sellDate: string;
-  buySymbol: string;
-  sellSymbol: string;
+  buySymbolAction: string;
+  sellSymbolAction: string;
   buyValueStock: number;
   sellValueStock: number;
   buyValuePurchased: number;
-  sellValueSell: number;
+  sellValueStockSell: number;
   valorGanho: number;
+  valorPerda: number;
+  sellValuePurchased: number;
 }
 
 interface GroupedEvents {
@@ -27,47 +30,131 @@ const Timeline: React.FC<{ events: TimelineEvent[] }> = ({ events }) => {
     return acc;
   }, {});
 
+  const formatCurrency = (value: number) => {
+    return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+  };
+
+  const simplifiedPercent = (rate: number) => {
+    return rate.toFixed(2) + "%";
+  };
+
   return (
-    <div className="bg-white dark:text-white dark:border-strokedark dark:bg-boxdark rounded shadow px-8 py-6 flex flex-col">
-      <ul className="timeline space-y-6">
+    <div className=" bg-boxdark dark:bg-boxdark text-white dark:text-gray-300 rounded-lg shadow-lg p-8">
+      <ul className="timeline space-y-8">
         {Object.keys(groupedEvents).map((date, index) => (
           <li
             key={index}
-            className={`p-4 border border-slate-500 rounded-lg shadow-sm ${
-              index % 2 === 0 ? "bg-gray-50 dark:boxdark" : "dark:boxdark"
-            }`}
+            className="p-6 border border-gray-700 rounded-lg shadow-sm bg-gray-800 dark:bg-gray-800"
           >
             <div>
-              <p className="text-sm text-gray-500">{date}</p>
+              <p className="text-sm text-gray-400">{date}</p>
               {groupedEvents[date].map((event, idx) => (
-                <div key={idx} className="grid grid-cols-3 gap-4 items-center mt-4">
-                  <div>
-                    <p className="font-semibold">Compra de Ação: {event.buySymbol}</p>
-                    <p>
-                      Valor da Ação quando comprou:{" "}
-                      {event.buyValueStock.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                    </p>
-                    <p>
-                      Valor investido:{" "}
-                      {event.buyValuePurchased.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <div className={`font-semibold text-lg ${event.valorGanho >= 0 ? "text-green-500" : "text-red"}`}>
-                      {event.valorGanho.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                      {event.valorGanho >= 0 ? (
-                        <ArrowUpIcon className="inline h-6 w-6 ml-2 text-green-500" />
-                      ) : (
-                        <ArrowDownIcon className="inline h-6 w-6 ml-2 text-red" />
-                      )}
+                <div
+                  key={idx}
+                  className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start mt-4"
+                >
+                  <div className="rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+                    <div className="flex justify-between items-center">
+                      <h4 className="text-title-md font-bold text-black dark:text-white">
+                        {event.sellSymbolAction}
+                      </h4>
+                    </div>
+
+                    <div className="mt-4 flex items-end justify-between">
+                      <div>
+                        <span className="text-sm font-medium dark:text-white">
+                          Valor Ação quando comprou
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-bold dark:text-white">
+                        {event.sellValueStock !== undefined &&
+                        event.sellValueStock !== null
+                          ? formatCurrency(event.sellValueStock)
+                          : "Valor não disponível"}
+                      </span>
+                    </div>
+
+                    <div className="mt-4 flex items-end justify-between">
+                      <div>
+                        <span className="text-sm font-medium dark:text-white">
+                          Valor Ação quando vendeu
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-bold dark:text-white">
+                        {event.sellValueStockSell !== undefined &&
+                        event.sellValueStockSell !== null
+                          ? formatCurrency(event.sellValueStockSell)
+                          : "Valor não disponível"}
+                      </span>
+                    </div>
+
+                    <div className="mt-4 flex items-end justify-between">
+                      <div>
+                        <span className="text-sm font-medium dark:text-white">
+                          Valor Investido
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-medium dark:text-white">
+                        {event.sellValuePurchased !== undefined &&
+                        event.sellValuePurchased !== null
+                          ? formatCurrency(event.sellValuePurchased)
+                          : "Valor não disponível"}
+                      </span>
                     </div>
                   </div>
-                  <div>
-                    <p className="font-semibold">Venda de Ação: {event.sellSymbol}</p>
-                    <p>
-                      Valor da Ação quando vendeu:{" "}
-                      {event.sellValueSell.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                    </p>
+
+                  {event.valorGanho !== null && (
+                       <div className="mt-22 text-center">
+                        <div className={`font-semibold text-lg text-green-500`}>
+                          {event.valorGanho.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                            <ArrowUpIcon className="inline h-6 w-6 ml-2 text-green-500" />
+                        </div>
+                      </div>
+                    )}
+                  
+                    {event.valorPerda !== null && (
+                      <div className="mt-22 text-center">
+                        <div className={`font-semibold text-lg text-red`}>
+                          {event.valorPerda.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                          <ArrowDownIcon className="inline h-6 w-6 ml-2 text-red" />
+                        </div>
+                      </div>
+                    )}
+
+                  <div className="mt-5 rounded-sm border border-stroke bg-white px-7.5 py-6 shadow-default dark:border-strokedark dark:bg-boxdark">
+                    <div className="flex justify-between items-center">
+                      <h4 className="text-title-md font-bold text-black dark:text-white">
+                        {event.buySymbolAction}
+                      </h4>
+                    </div>
+
+                    <div className="mt-4 flex items-end justify-between">
+                      <div>
+                        <span className="text-sm font-medium dark:text-white">
+                          Valor da Ação
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-bold dark:text-white">
+                        {event.buyValueStock !== undefined &&
+                        event.buyValueStock !== null
+                          ? formatCurrency(event.buyValueStock)
+                          : "Valor não disponível"}
+                      </span>
+                    </div>
+
+                    <div className="mt-4 flex items-end justify-between">
+                      <div>
+                        <span className="text-sm font-medium dark:text-white">
+                          Valor Investido
+                        </span>
+                      </div>
+                      <span className="flex items-center gap-1 text-sm font-medium dark:text-white">
+                        {event.buyValuePurchased !== undefined &&
+                        event.buyValuePurchased !== null
+                          ? formatCurrency(event.buyValuePurchased)
+                          : "Valor não disponível"}
+                      </span>
+                    </div>
                   </div>
                 </div>
               ))}

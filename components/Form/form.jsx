@@ -44,7 +44,6 @@ export default function Form({
 		} else if (step == 3) {
 			updateFormData(addOnsInfo);
 		} else if (step == 4){
-			console.log("enviando email")
 
 			const res = await fetch('/api/email', {
 				method: 'POST',

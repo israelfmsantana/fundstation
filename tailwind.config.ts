@@ -25,6 +25,7 @@ const config: Config = {
           'sidebar-mobile': "url('../../public/images/bg-sidebar-mobile.svg')",
         },
         current: "currentColor",
+        petroleum: 'rgb(11 32 57)',
         transparent: "transparent",
         white: "#FFFFFF",
         black: "#1C2434",

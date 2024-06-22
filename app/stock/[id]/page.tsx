@@ -13,7 +13,6 @@ const StockPage = ({
 
 }) => {
   const params = useParams<{id: string}>()
-  console.log(params.id)
 
   
   return (

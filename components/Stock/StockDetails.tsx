@@ -118,7 +118,6 @@ const StockCardDetails: React.FC<StockDetailsProps> = ({
                 let getStockDetails = 'https://brapi.dev/api/quote/' + nameStock + '?range=' + filter + '&token=' + token
                 const res = await axios.get(getStockDetails);
                 setStockDetails(res.data.results[0]);
-                console.log(res.data.results[0])
                 setData(res.data.results[0]);
             } catch (error) {
                 setData([]);
@@ -129,8 +128,6 @@ const StockCardDetails: React.FC<StockDetailsProps> = ({
         updateChartData();
     }, [filter]);
 
-    console.log(data)
-    console.log(filter)
     // const data = buildData(dataStockDetails);
     return (
         <>
